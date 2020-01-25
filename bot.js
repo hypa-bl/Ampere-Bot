@@ -68,7 +68,7 @@ client.on('message', message => {
 		break;
          }
      }
-});
+);
 
 //lousy code that replies to kil with no
 
