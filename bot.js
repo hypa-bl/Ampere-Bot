@@ -58,12 +58,12 @@ bot.on('message', function (user, userid, channelID, message, evt) {
 		switch(cmd) {
 				
 				
-    	
-				bot.sendMessage ({
-     	    to: channelID,
-     	    message: 'no'
-         }) 	
-      }
-		
-		} 
+    	case 'il':
+		bot.sendMessage ({
+			to: channelID,
+			message: 'no'
+				});
+	break;	
+  			}
+	} 
 });
