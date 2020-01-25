@@ -6,7 +6,7 @@ const { Client, Attachment } = require('discord.js');
 const client = new Client();
 client.on('ready', () => {
   console.log('new client ready');
-//});
+});
 
 // Configure logger settings
 logger.remove(logger.transports.Console);
