@@ -2,7 +2,7 @@ var Discord = require('discord.io');
 var logger = require('winston');
 var auth = require('./auth.json');
 
-const InfoEmbed = require('discord.js');
+const Fancy = require('discord.js');
 const client = new Client();
 client.on('ready', () => {
   console.log('new client ready');
