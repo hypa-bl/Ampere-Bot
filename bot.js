@@ -1,19 +1,27 @@
 var Discord = require('discord.io');
 var logger = require('winston');
 var auth = require('./auth.json');
+
+const { Client, Attachment } = require('discord.js');
+const client = new Client();
+client.on('ready', () => {
+  console.log('new client ready');
+});
+
 // Configure logger settings
 logger.remove(logger.transports.Console);
 logger.add(new logger.transports.Console, {
     colorize: true
 });
 logger.level = 'debug';
+
 // Initialize Discord Bot
 var bot = new Discord.Client({
    token: auth.token,
    autorun: true
 });
 bot.on('ready', function (evt) {
-    logger.info('ready!');
+    logger.info('old client ready?');
     logger.info('logged in as Ampere');
     logger.info(bot.username + ' - (' + bot.id + ')');
 });
