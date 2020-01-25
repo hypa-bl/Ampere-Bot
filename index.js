@@ -1,6 +1,6 @@
 //loading up the libs
 const Discord = require('discord.js');
-const { prefix, token } = require('auth.json');
+const prefix = require('./auth.json');
 
 //libs for creating logs
 var logger = require('winston');
@@ -26,7 +26,7 @@ client.on('message', message => {
 	console.log(message.content);
 });
 
-client.login = (auth.token);
+client.login = ('NjcwNTAzMDM4MjA4OTY2NjY3.XivWrA.KkQnOXpM015QgP2Tb6lAWn1Cf5o');
 
 
 if (message.content === 'kil') {
