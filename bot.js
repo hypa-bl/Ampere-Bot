@@ -1,12 +1,12 @@
-var Discord = require('discord.io');
+var DiscordIO = require('discord.io');
 var logger = require('winston');
 var auth = require('./auth.json');
 
-const Fancy = require('discord.js');
-// const client = new Client();
-// client.on('ready', () => {
-// console.log('new client ready');
-// });
+const Discord = require('discord.js');
+const client = new Discord.Client();
+client.on('ready', () => {
+console.log('refreshed client ready');
+});
 
 // Configure logger settings
 logger.remove(logger.transports.Console);
@@ -15,8 +15,8 @@ logger.add(new logger.transports.Console, {
 });
 logger.level = 'debug';
 
-//Initialize Discord Bot
-var bot = new Discord.Client({
+//Initialize Discord Bot + token check
+var bot = new DiscordIO.Client({
    token: auth.token,
    autorun: true
 });
@@ -32,7 +32,10 @@ const InfoEmbed = new Discord.RichEmbed()
 	.setDescription('early test version of a discord bot I made for fun.')
 	.setFooter('enjoy.');
 
-bot.on('message', function (user, userID, channelID, message, evt) {
+client.on('message', message => {
+	console.log(message.content);
+});
+
     // bot needs to know if it will execute a command
     // it will listen for messages that will start with `!`
     // editing substring to ~
