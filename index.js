@@ -4,6 +4,8 @@ const Discord = require('discord.js');
 //libs for creating logs
 var logger = require('winston');
 
+client.login = ('NjcwNTAzMDM4MjA4OTY2NjY3.XivWrA.KkQnOXpM015QgP2Tb6lAWn1Cf5o');
+
 // Configure logger settings
 logger.remove(logger.transports.Console);
 logger.add(new logger.transports.Console, { colorize: true });
@@ -17,9 +19,6 @@ const client = new Discord.Client();
 client.once('ready', () => {
 	console.log('booting~');
 });
-
-client.login = ('NjcwNTAzMDM4MjA4OTY2NjY3.XivWrA.KkQnOXpM015QgP2Tb6lAWn1Cf5o');
-
 
 //reading messages
 client.on('message', message => {
