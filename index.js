@@ -11,7 +11,20 @@ client.once('ready', () => {
 	console.log('booting~');
 });
 
+
+//reading messages
+client.on('message', message => {
+	console.log(message.content);
+});
+
 client.login = auth.token;
+
+
+if (message.content === 'kil') {
+	// send back "no" to the channel the message was sent in
+	message.channel.send('no');
+}
+
 
 client.on('message', message => {
 	if (!message.content.startsWith(prefix) || message.author.bot) return;
