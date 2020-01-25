@@ -13,13 +13,13 @@ var bot = new Discord.Client({
    autorun: true
 });
 bot.on('ready', function (evt) {
-    logger.info('Connected');
-    logger.info('Logged in as: ');
+    logger.info('ready!');
+    logger.info('logged in as Ampere');
     logger.info(bot.username + ' - (' + bot.id + ')');
 });
 bot.on('message', function (user, userID, channelID, message, evt) {
-    // Our bot needs to know if it will execute a command
-    // It will listen for messages that will start with `!`
+    // bot needs to know if it will execute a command
+    // it will listen for messages that will start with `!`
     // editing substring to ~
     if (message.substring(0, 1) == '~') {
         var args = message.substring(1).split(' ');
