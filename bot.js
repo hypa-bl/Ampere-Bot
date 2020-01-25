@@ -1,119 +1,20 @@
-var DiscordIO = require('discord.io');
-var logger = require('winston');
-var auth = require('./auth.json');
-
 const Discord = require('discord.js');
+const { prefix, token } = require('auth.json');
+
 const client = new Discord.Client();
-client.on('ready', () => {
-console.log('refreshed client ready');
-});
 
-// Configure logger settings
-logger.remove(logger.transports.Console);
-logger.add(new logger.transports.Console, {
-    colorize: true
-});
-logger.level = 'debug';
-
-//Initialize Discord Bot + token check
-var bot = new DiscordIO.Client({
-   token: auth.token,
-   autorun: true
-});
-bot.on('ready', function (evt) {
-    logger.info('old client ready?');
-    logger.info('logged in as Ampere');
-    logger.info(bot.username + ' - (' + bot.id + ')');
+client.once('ready', () => {
+	console.log('Ready!');
 });
 
 client.on('message', message => {
-	console.log(message.content);
-});
+	if (!message.content.startsWith(prefix) || message.author.bot) return;
 
-    // bot needs to know if it will execute a command
-    // it will listen for messages that will start with `!`
-    // editing substring to ~
-    if (bot.message.substring(0, 1) == '~') {
-        var args = message.substring(1).split(' ');
-        var cmd = args[0];
-       
-        args = args.splice(1);
-        switch(cmd) {
-            // !ping
-            case 'ping':
-                bot.sendMessage({
-                    to: channelID,
-                    message: 'what’s popping?'
-                });
-            break;
+	const args = message.content.slice(prefix.length).split(/ +/);
+	const command = args.shift().toLowerCase();
 
-            // Just add any case commands if you want to.
-
-            case 'ayy':
-                bot.sendMessage({
-                    to: channelID,
-                    message: 'lmao'
-                });
-            break; 
-
-	//fancy embed on command
-		case 'info':
-	const InfoEmbed = new Discord.MessageEmbed()
-	.setColor('#f58164')
-	.setTitle('Ampere Bot by hypa.')
-	.setDescription('early test version of a discord bot I made for fun.')
-	.setFooter('enjoy.');
-		
-	channel.send(InfoEmbed);
-		break;
-         }
-     }
-
-
-//lousy code that replies to kil with no
-
-bot.on('message', function (user, userid, channelID, message, evt) {
-      if (message.substring(0, 1) == 'k') {
-		  var args = message.substring(1).split(' ');
-         	  var cmd = args[0];
-		  args = args.splice(1);
-		
-		  switch(cmd) {
-								
-    	case 'il':
-	bot.sendMessage ({
-	to: channelID,
-	message: 'no'
-	});
-	break;	
-  	}
-    } 
-});
-
-//most lousy code that replies to ayy 
-
-bot.on('message', function (user, userid, channelID, message, evt) {
-      if (message.substring(0, 1) == 'a') {
-		  var args = message.substring(1).split(' ');
-         	  var cmd = args[0];
-		  args = args.splice(1);
-		
-		  switch(cmd) {
-								
-    	case 'yy':
-	bot.sendMessage ({
-	to: channelID,
-	message: 'lmao'
-	});
-	break;	
-  	
-
-	case 'pyr':
-	bot.sendMessage ({
-	to: channelID,
-	message: 'Дpyг'
-	});
-	break;
+	if (command === 'ping') {
+		message.channel.send('what’s popping?');
+	} else if (command === 'ayy') {
+		message.channel.send('lmao');
 	}
-    } 
-});
