@@ -47,6 +47,8 @@ bot.on('message', function (user, userID, channelID, message, evt) {
      }
 });
 
+//lousy code that replies to kil with no
+
 bot.on('message', function (user, userid, channelID, message, evt) {
       if (message.substring(0, 1) == 'k') {
 		  var args = message.substring(1).split(' ');
@@ -59,6 +61,25 @@ bot.on('message', function (user, userid, channelID, message, evt) {
 	bot.sendMessage ({
 	to: channelID,
 	message: 'no'
+	});
+	break;	
+  	}
+    } 
+});
+
+
+bot.on('message', function (user, userid, channelID, message, evt) {
+      if (message.substring(0, 1) == 'a') {
+		  var args = message.substring(1).split(' ');
+         	  var cmd = args[0];
+		  args = args.splice(1);
+		
+		  switch(cmd) {
+								
+    	case 'yy':
+	bot.sendMessage ({
+	to: channelID,
+	message: 'lmao'
 	});
 	break;	
   	}
