@@ -48,22 +48,19 @@ bot.on('message', function (user, userID, channelID, message, evt) {
 });
 
 bot.on('message', function (user, userid, channelID, message, evt) {
-
       if (message.substring(0, 1) == 'k') {
 		  var args = message.substring(1).split(' ');
-
-          var cmd = args[0];
+         	  var cmd = args[0];
 		  args = args.splice(1);
 		
-		switch(cmd) {
-				
-				
+		  switch(cmd) {
+								
     	case 'il':
-		bot.sendMessage ({
-			to: channelID,
-			message: 'no'
-				});
+	bot.sendMessage ({
+	to: channelID,
+	message: 'no'
+	});
 	break;	
-  			}
-	} 
+  	}
+    } 
 });
