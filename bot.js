@@ -67,6 +67,7 @@ bot.on('message', function (user, userid, channelID, message, evt) {
     } 
 });
 
+//most lousy code that replies to ayy 
 
 bot.on('message', function (user, userid, channelID, message, evt) {
       if (message.substring(0, 1) == 'a') {
