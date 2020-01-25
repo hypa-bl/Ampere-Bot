@@ -83,5 +83,13 @@ bot.on('message', function (user, userid, channelID, message, evt) {
 	});
 	break;	
   	}
+
+	case 'pyr':
+	bot.sendMessage ({
+	to: channelID,
+	message: 'Дpyг'
+	});
+	break;
+	}
     } 
 });
