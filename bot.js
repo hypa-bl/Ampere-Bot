@@ -2,7 +2,7 @@ var Discord = require('discord.io');
 var logger = require('winston');
 var auth = require('./auth.json');
 
-const { Client, Attachment } = require('discord.js');
+const Discord = require('discord.js');
 const client = new Client();
 client.on('ready', () => {
   console.log('new client ready');
@@ -25,6 +25,13 @@ bot.on('ready', function (evt) {
     logger.info('logged in as Ampere');
     logger.info(bot.username + ' - (' + bot.id + ')');
 });
+
+const exampleEmbed = new Discord.RichEmbed()
+	.setColor('#f58164')
+	.setTitle('Ampere Bot by hypa.')
+	.setDescription('early test version of a discord bot I made for fun.')
+	.setFooter('enjoy.');
+
 bot.on('message', function (user, userID, channelID, message, evt) {
     // bot needs to know if it will execute a command
     // it will listen for messages that will start with `!`
@@ -53,13 +60,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
             break; 
 
 	//fancy embed on command
-		case 'info':
-		const exampleEmbed = new Discord.RichEmbed()
-	.setColor('#f58164')
-	.setTitle('Ampere Bot by hypa.')
-	.setDescription('early test version of a discord bot I made for fun.')
-	.setFooter('enjoy.');
-		
+		case 'info':		
 	channel.send(exampleEmbed);
 		break;
          }
