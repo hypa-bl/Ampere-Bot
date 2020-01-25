@@ -50,7 +50,18 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                     to: channelID,
                     message: 'lmao'
                 });
-            break;                   
+            break; 
+
+	//fancy embed on command
+		case 'info':
+		const exampleEmbed = new Discord.RichEmbed()
+	.setColor('#f58164')
+	.setTitle('Ampere Bot by hypa.')
+	.setDescription('early test version of a discord bot I made for fun.')
+	.setFooter('enjoy.');
+		
+	channel.send(exampleEmbed);
+		break;
          }
      }
 });
