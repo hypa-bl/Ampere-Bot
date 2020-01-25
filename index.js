@@ -1,24 +1,15 @@
 //loading up the libs
-const Discord = require('discord.js', 'discord.io');
+const Discord = require('discord.js');
 const { prefix, token } = require('auth.json');
 
 //libs for creating logs
 var logger = require('winston');
-var auth = require('./auth.json');
+var auth = require('auth.json');
 
 // Configure logger settings
 logger.remove(logger.transports.Console);
 logger.add(new logger.transports.Console, { colorize: true });
 logger.level = 'debug';
-
-
-// Initialize Discord Bot
-var bot = new Discord.Client({
-   token: auth.token,
-   autorun: true
-});
-
-
 
 //creating a new client
 const client = new Discord.Client();
