@@ -1,14 +1,15 @@
 {
-  "name": "Ampere",
-  "version": "1.0.2",
-  "description": "made out of hours I could have spent studying",
-  "main": "bot.js",
-  "author": "hypa_bl",
-  "scripts": {
-	"start": "node bot.js"
+	"name": "Ampere",
+	"version": "1.0.2",
+	"description": "made out of hours I could have spent studying",
+	"main": "bot.js",
+	"author": "hypa_bl",
+	"scripts": {
+		"start": "node bot.js"
 	},
-  "dependencies": {
-    "discord.io": "https://github.com/woor/discord.io/tarball/gateway_v6",
-    "winston": "^3.2.1"
+	"dependencies": {
+		"discord.js"
+		"discord.io": "https://github.com/woor/discord.io/tarball/gateway_v6",
+		"winston": "^3.2.1"
   }
 }
