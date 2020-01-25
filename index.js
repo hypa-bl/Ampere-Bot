@@ -1,45 +1,42 @@
-//loading up the libs
-const Discord = require('discord.js');
-
-//libs for creating logs
+/var Discord = require('discord.io');
 var logger = require('winston');
-
-client.login = ('NjcwNTAzMDM4MjA4OTY2NjY3.XivWrA.KkQnOXpM015QgP2Tb6lAWn1Cf5o');
+var auth = require('./auth.json');
 
 // Configure logger settings
 logger.remove(logger.transports.Console);
-logger.add(new logger.transports.Console, { colorize: true });
+logger.add(new logger.transports.Console, {
+    colorize: true
+});
 logger.level = 'debug';
 
-//creating a new client
-const client = new Discord.Client();
-
-//sending message to log when ready
-//once means this is only going to run on startup
-client.once('ready', () => {
-	console.log('booting~');
+// Initialize Discord Bot
+var bot = new Discord.Client({
+   token: auth.token,
+   autorun: true
 });
 
-//reading messages
-client.on('message', message => {
-	console.log(message.content);
+bot.on('ready', function (evt) {
+    logger.info('booting.');
+    logger.info('logged in as Ampere');
+    logger.info(bot.username + ' - (' + bot.id + ')');
 });
-
-
-if (message.content === 'kil') {
-	// send back "no" to the channel the message was sent in
-	message.channel.send('no');
-}
-
-
-client.on('message', message => {
-	if (!message.content.startsWith(prefix) || message.author.bot) return;
-
-	const args = message.content.slice(prefix.length).split(/ +/);
-	const command = args.shift().toLowerCase();
-
-	if (command === 'ping') {
-		message.channel.send('what’s popping?');
-	} else if (command === 'ayy') {
-		message.channel.send('lmao');
-	}
+bot.on('message', function (user, userID, channelID, message, evt) {
+    // Our bot needs to know if it will execute a command
+    // It will listen for messages that will start with `!`
+    if (message.substring(0, 1) == '~') {
+        var args = message.substring(1).split(' ');
+        var cmd = args[0];
+       
+        args = args.splice(1);
+        switch(cmd) {
+            // !ping
+            case 'ping':
+                bot.sendMessage({
+                    to: channelID,
+                    message: 'what’s popping?'
+                });
+            break;
+            // Just add any case commands if you want to.
+         }
+     }
+});
