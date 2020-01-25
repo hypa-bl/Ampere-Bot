@@ -3,10 +3,10 @@ var logger = require('winston');
 var auth = require('./auth.json');
 
 const Fancy = require('discord.js');
-const client = new Client();
-client.on('ready', () => {
-  console.log('new client ready');
-});
+// const client = new Client();
+// client.on('ready', () => {
+// console.log('new client ready');
+// });
 
 // Configure logger settings
 logger.remove(logger.transports.Console);
