@@ -83,7 +83,7 @@ bot.on('message', function (user, userid, channelID, message, evt) {
 	message: 'lmao'
 	});
 	break;	
-  	}
+  	
 
 	case 'pyr':
 	bot.sendMessage ({
