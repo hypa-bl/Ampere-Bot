@@ -2,7 +2,7 @@ var Discord = require('discord.io');
 var logger = require('winston');
 var auth = require('./auth.json');
 
-const DiscordNew = require('discord.js');
+const InfoEmbed = require('discord.js');
 const client = new Client();
 client.on('ready', () => {
   console.log('new client ready');
@@ -16,7 +16,7 @@ logger.add(new logger.transports.Console, {
 logger.level = 'debug';
 
 //Initialize Discord Bot
-var bot = new DiscordNew.Client({
+var bot = new Discord.Client({
    token: auth.token,
    autorun: true
 });
@@ -26,7 +26,7 @@ bot.on('ready', function (evt) {
     logger.info(bot.username + ' - (' + bot.id + ')');
 });
 
-const exampleEmbed = new Discord.RichEmbed()
+const InfoEmbed = new Discord.RichEmbed()
 	.setColor('#f58164')
 	.setTitle('Ampere Bot by hypa.')
 	.setDescription('early test version of a discord bot I made for fun.')
@@ -61,7 +61,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
 
 	//fancy embed on command
 		case 'info':		
-	channel.send(exampleEmbed);
+	channel.send(InfoEmbed);
 		break;
          }
      }
