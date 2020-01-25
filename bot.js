@@ -64,9 +64,3 @@ bot.on('message', function (user, userid, channelID, message, evt) {
   	}
     } 
 });
-
-bot.on('message', function (user, userid, channelID, message, evt), msg => {
-  if (msg.content === 'ping') {
-    msg.reply('Pong!');
-  }
-});
