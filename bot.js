@@ -49,10 +49,21 @@ bot.on('message', function (user, userID, channelID, message, evt) {
 
 bot.on('message', function (user, userid, channelID, message, evt) {
 
-      if (message.content == 'kil') {
-      bot.sendMessage ({
-          to: channelID,
-          message: 'no'
+      if (message.substring(0, 1) == 'k') {
+		  var args = message.substring(1).split(' ');
+
+          var cmd = args[0];
+		  args = args.splice(1);
+		
+		switch(cmd) {
+				
+				
+    	
+				bot.sendMessage ({
+     	    to: channelID,
+     	    message: 'no'
          }) 	
       }
+		
+		} 
 });
