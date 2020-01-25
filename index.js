@@ -1,10 +1,8 @@
 //loading up the libs
 const Discord = require('discord.js');
-const prefix = require('./auth.json');
 
 //libs for creating logs
 var logger = require('winston');
-var auth = require('auth.json');
 
 // Configure logger settings
 logger.remove(logger.transports.Console);
@@ -20,13 +18,13 @@ client.once('ready', () => {
 	console.log('booting~');
 });
 
+client.login = ('NjcwNTAzMDM4MjA4OTY2NjY3.XivWrA.KkQnOXpM015QgP2Tb6lAWn1Cf5o');
+
 
 //reading messages
 client.on('message', message => {
 	console.log(message.content);
 });
-
-client.login = ('NjcwNTAzMDM4MjA4OTY2NjY3.XivWrA.KkQnOXpM015QgP2Tb6lAWn1Cf5o');
 
 
 if (message.content === 'kil') {
