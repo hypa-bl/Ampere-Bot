@@ -2,10 +2,10 @@ var Discord = require('discord.io');
 var logger = require('winston');
 var auth = require('./auth.json');
 
-//const { Client, Attachment } = require('discord.js');
-//const client = new Client();
-//client.on('ready', () => {
-//  console.log('new client ready');
+const { Client, Attachment } = require('discord.js');
+const client = new Client();
+client.on('ready', () => {
+  console.log('new client ready');
 //});
 
 // Configure logger settings
@@ -15,7 +15,7 @@ logger.add(new logger.transports.Console, {
 });
 logger.level = 'debug';
 
-// Initialize Discord Bot
+Initialize Discord Bot
 var bot = new Discord.Client({
    token: auth.token,
    autorun: true
