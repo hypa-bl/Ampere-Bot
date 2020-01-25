@@ -26,12 +26,6 @@ bot.on('ready', function (evt) {
     logger.info(bot.username + ' - (' + bot.id + ')');
 });
 
-const InfoEmbed = new Discord.RichEmbed()
-	.setColor('#f58164')
-	.setTitle('Ampere Bot by hypa.')
-	.setDescription('early test version of a discord bot I made for fun.')
-	.setFooter('enjoy.');
-
 client.on('message', message => {
 	console.log(message.content);
 });
@@ -63,7 +57,13 @@ client.on('message', message => {
             break; 
 
 	//fancy embed on command
-		case 'info':		
+		case 'info':
+	const InfoEmbed = new Discord.MessageEmbed()
+	.setColor('#f58164')
+	.setTitle('Ampere Bot by hypa.')
+	.setDescription('early test version of a discord bot I made for fun.')
+	.setFooter('enjoy.');
+		
 	channel.send(InfoEmbed);
 		break;
          }
