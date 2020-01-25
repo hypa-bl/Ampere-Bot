@@ -26,7 +26,7 @@ client.on('message', message => {
 	console.log(message.content);
 });
 
-client.login = auth.token;
+client.login = (auth.token);
 
 
 if (message.content === 'kil') {
