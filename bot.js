@@ -46,3 +46,14 @@ bot.on('message', function (user, userID, channelID, message, evt) {
          }
      }
 });
+
+
+    bot.on("message", (message) => {
+
+      if (message.content == "kil") {
+
+        message.channel.send("no");
+
+      }
+
+    });
