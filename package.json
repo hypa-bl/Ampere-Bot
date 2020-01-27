@@ -1,15 +1,16 @@
 {
-	"name": "Ampere",
-	"version": "1.0.3",
-	"description": "made out of hours I could have spent studying",
-	"main": "index.js",
-	"author": "hypa_bl",
-	"scripts": {
-		"start": "node bot.js"
-	},
-	"dependencies": {
-		"discord.js": "https://github.com/discordjs/discord.js",
-		"discord.io": "https://github.com/woor/discord.io/tarball/gateway_v6",
-		"winston": "^3.2.1"
+  "name": "Ampere",
+  "engines": {
+    "node": "10"
+  },
+  "version": "1.1.7",
+  "description": "made out of hours I could’ve spent studying",
+  "main": "discjsbot.js",
+  "author": "hypa_bl",
+  "scripts": {
+    "start": "node discjsbot.js"
+  },
+  "dependencies": {
+    "discord.js": "^11.5.1"
   }
 }
