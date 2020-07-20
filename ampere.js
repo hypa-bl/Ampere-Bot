@@ -73,7 +73,7 @@ const date = moment()
   .format("MMM Do, h:mm:ss a");
 
 //boot
-ampere.login(process.env.TOKEN);
+//ampere.login(token placeholder);
 ampere.once("ready", () => {
   ampere.user.setActivity(version + " | ~info");
   // ampere.user.setAvatar(pfp);
