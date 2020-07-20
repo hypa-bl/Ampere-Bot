@@ -1,0 +1,362 @@
+//loading our libs + prefix + token and giving our client a name , pfp and version
+const Discord = require("discord.js");
+const config = require("./panties.json");
+const TOKEN = process.env.TOKEN;
+const ampere = new Discord.Client();
+const version = "1.3.0";
+const avatar = "https://i.imgur.com/0gLzpGd.jpg";
+ampere.login(TOKEN);
+
+//keeping the bot alive
+const http = require("http");
+const express = require("express");
+const app = express();
+app.get("/", (request, response) => {
+  console.log("Ampere on duty. > " + Date.now());
+  response.sendStatus(200);
+});
+app.listen(process.env.PORT);
+setInterval(() => {
+  http.get(`http://${process.env.PROJECT_DOMAIN}.glitch.me/`);
+}, 280000);
+
+//create logs on startup + set an activity as game | ONLY USE SETAVATAR COMMAND WHEN UPDATING TO NEW PFP
+ampere.on("ready", () => {
+  ampere.user.setActivity("Richard and Mortimer", { type: "WATCHING" });
+//ampere.user.setAvatar(avatar);
+  console.log(`using discord.js`);
+  console.log(`booting up`);
+  console.info(`Logged in as ${ampere.user.tag}!`);
+});
+
+//links to commonly used images
+const SSLogo = "https://i.imgur.com/Z6nohcH.png";
+const SSWatermark = "https://i.imgur.com/gqHWRVi.png";
+
+
+//responses that deploy on user input
+ampere.on("message", async message => {
+  if (message.author.bot) return;
+
+  if (message.content.startsWith(config.prefix + "ping")) {
+    message.channel.send("what’s popping?");
+  } else if (message.content.startsWith(config.prefix + "beep")) {
+    message.channel.send("bop");
+  } else if (message.content.startsWith(config.prefix + "peace")) {
+    message.channel.send("peas", {
+      files: ["https://i.imgur.com/TvdChAX.jpg"]
+    });
+  } else if (message.content.startsWith(config.prefix + "gopnik")) {
+    let rando_gop = [
+      "https://i.imgur.com/chLyxsY.jpg",
+      "https://i.imgur.com/IODlWJ9.jpg",
+      "https://i.imgur.com/b9iv5aE.jpg"
+    ];
+    message.channel.send(`cyka`, {
+      file: rando_gop[Math.floor(Math.random() * rando_gop.length)]
+    });
+  } else if (message.content.startsWith(config.prefix + "thighs")) {
+    const rando_imgs = [
+      "https://i.imgur.com/IODlWJ9.jpg",
+      "https://i.imgur.com/TDjX1dV.png",
+      "https://i.imgur.com/UwoZNoU.jpg"
+    ];
+    message.channel.send(`yes`, {
+      file: rando_imgs[Math.floor(Math.random() * rando_imgs.length)]
+    });
+  } else if (message.content.startsWith(config.prefix + "map Refuge")) {
+    message.channel.send({
+      files: ["https://i.imgur.com/y5xbJ8j.jpg"]
+    });
+  } else if (message.content.startsWith(config.prefix + "/clearchat")) {
+    if (!message.member.hasPermission("MANAGE_MESSAGES"))
+      return message.channel.send(
+        "aight deletin--- whoa there bud, you lack permissions to do that"
+      );
+
+    const args = message.content.split(" ").slice(1); // All arguments behind the command name with the prefix
+    const amount = args.join(" "); // Amount of messages which should be deleted
+
+    if (!amount) return message.channel.send("give me the numbers, mason"); // Checks if the `amount` parameter is given
+    if (isNaN(amount)) return message.channel.send("the NUMBERS"); // Checks if the `amount` parameter is a number. If not, the command throws an error
+
+    if (amount > 100)
+      return message.channel.send(
+        "ayy cunt you can’t delete more than 100 messages at once"
+      ); // Checks if the `amount` integer is bigger than 100
+    if (amount < 1)
+      return message.channel.send("unable to delete lesser than one messages"); // Checks if the `amount` integer is smaller than 1
+
+    await message.channel.fetchMessages({ limit: amount }).then(messages => {
+      // Fetches the messages
+      message.channel.bulkDelete(
+        messages // Bulk deletes all messages that have been fetched and are not older than 14 days (due to the Discord API)
+      );
+    });
+  } else if (message.content == "ayy") {
+    message.channel.send("lmao");
+  } else if (message.content == "yuh") {
+    message.channel.send("ay");
+  } else if (message.content.includes(" kil")) {
+    message.channel.send("no");
+  } else if (message.content == "gg") {
+    message.channel.send("gg");
+  } else if (message.content.includes("yoda")) {
+    message.channel.send("mmmm ketamine").then(msg => {
+      msg.delete(1000);
+    });
+  } else if (message.isMentioned(ampere.user)) {
+    message.reply("pings are annoying");
+  } else if (message.content == "understandable") {
+    message.channel.send("have a nice day");
+  } else if (message.content == "uh oh") {
+    await console.log("a stinky monkey reference was made!");
+    await message.react("🇸");
+    await message.react("🇹");
+    await message.react("🇮");
+    await message.react("🇳");
+    await message.react("🇰");
+    await message.react("🇾");
+  } else if (message.content == "good bot") {
+    message.react("😩");
+  }
+
+  //Important
+  else if (message.content.startsWith(config.prefix + "changelog")) {
+    const ChangelogEmbed = new Discord.RichEmbed()
+      .setColor("#f58164")
+      .setAuthor("Ampere bot | changelog")
+      .addField(
+        version,
+        "- Added a bunch of hidden replies \n- ~/clearchat command for admins \n- Mu is now available for charinfo. Picture is not added \n- Ampere can now be up 24 7",
+        true
+      )
+      .setTimestamp()
+      .setFooter("Ampere bot by hypa.");
+
+    message.channel.send(ChangelogEmbed);
+  } else if (message.content.startsWith(config.prefix + "info")) {
+    try {
+    const InfoEmbed = new Discord.RichEmbed()
+      .setColor("#f58164")
+      .setTitle("Ampere bot | by hypa.")
+      .setAuthor("Ampere")
+      .setThumbnail(ampere.user.avatarURL)
+      .setDescription("Coded exclusively for the Second Sky Server.")
+      .addField(
+        "○ prefix commands [~] | text and images",
+        "ping, info, beep, changelog, peace, gopnik, thighs"
+      )
+      .addField(
+        "○ non-prefix commands",
+        "ayy, kil, yuh, gg, understandable, uh oh"
+      )
+      .addField(
+        "○ special prefix command",
+        "use `~charinfo overview`  to access the character info files of listed characters from Second Sky!"
+      )
+      .setTimestamp()
+      .setFooter(
+        version + " use changelog command to see changes",
+        ampere.user.avatarURL
+      );
+
+    await message.channel.send(InfoEmbed);
+    const logo = ampere.emojis.find(emoji => emoji.name === "SSLogo")
+    await message.react(logo);
+    }
+    catch (error) {
+      console.error('your info react just shat its pants');
+    }
+  } else if (message.content.startsWith(config.prefix + "plotdoc")) {
+    let PlotEmbed = new Discord.RichEmbed()
+      .setColor("#F58164")
+      .setAuthor("Google Docs")
+      .setTitle("Project Second Sky | Documentation")
+      .setThumbnail("https://i.imgur.com/Z6nohcH.png")
+      .setDescription(
+        "File for documenting the elements featured in the comic project, including a list of characters and storylines for each chapter. \nClick on this embed to view."
+      )
+      .setURL(
+        "https://docs.google.com/document/d/1trUqg8XsfQ7-eGIhEtcvyyH1ORVFn6XeZkN8yHSMCCg/edit?usp=drivesdk"
+      );
+
+    message.channel.send(PlotEmbed);
+  }
+});
+
+//The Character info segment.
+//-----------------------------
+
+ampere.on("message", message => {
+  if (message.author.bot) return;
+
+  if (message.content == config.prefix + "charinfo") {
+    message.channel.send(
+      "use the command followed with **(character name)**, or use `~charinfo overview` if confused about names!"
+    );
+  }
+
+  //overview command
+  else if (message.content.startsWith(config.prefix + "charinfo overview")) {
+    const CIoverview = new Discord.RichEmbed()
+      .setColor("#f58164")
+      .setTitle("The Character Viewer")
+      .setAuthor("Ampere")
+      .setDescription(
+        "The character viewer of Ampere bot allows users to view info on characters in the Second Sky Project. Only basic info is included, please refer to plot document using `~plotdoc` or inquire the writers for more info. \nUse command `~charinfo (character name)` to access a specific character file. \nUse command `~map (region name)` to access either of the maps",
+        true
+      )
+      .addField(
+        "○ Available Characters",
+        "Epsilon, Ilium, Heather, DC, Amadeus, Mu"
+      )
+      .addField("○ Maps", "Refuge")
+      .setTimestamp()
+      .setFooter("Ampere bot by hypa.");
+
+    message.channel.send(CIoverview);
+  }
+  //Epsilon
+  else if (message.content.startsWith(config.prefix + "charinfo Epsilon" || config.prefix + "charinfo Isaac")) {
+    const CIepsilon = new Discord.RichEmbed()
+      .setColor("#e9c081")
+      .setTitle("Isaac Epsilon")
+      .setAuthor("Character Viewer | Project Second Sky")
+      .setThumbnail("https://i.imgur.com/KiB31Od.jpg")
+      .addField(
+        "General Info",
+        "20M, 5’8” \nStudent \nScience Side, Protagonists",
+        true
+      )
+      .addField("Esper Status", "Potential \nUnidentified", true)
+      .addField(
+        "Additional Info",
+        "Uses Gear - The Conceptsquared \nIntroduced - Chapter 01"
+      )
+      .attachFiles([SSWatermark])
+      .setImage("attachment://gqHWRVi.png");
+
+    message.channel.send(CIepsilon);
+  }
+  //Ilium
+  else if (message.content.startsWith(config.prefix + "charinfo Ilium")) {
+    const CIilium = new Discord.RichEmbed()
+      .setColor("#405469")
+      .setTitle("Ilium Bell")
+      .setAuthor("Character Viewer | Project Second Sky")
+      .setThumbnail("https://i.imgur.com/hpkGZUG.png")
+      .addField(
+        "General Info",
+        "20F, 5’6” \nStudent \nMagic Side, Protagonists",
+        true
+      )
+      .addField("Esper Status", "Potential \nVibration Control", true)
+      .addField(
+        "Additional Info",
+        "Uses Gear - Broken Sword \nIntroduced - Chapter 01"
+      )
+      .attachFiles([SSWatermark])
+      .setImage("attachment://gqHWRVi.png");
+
+    message.channel.send(CIilium);
+  }
+  //Heather
+  else if (message.content.startsWith(config.prefix + "charinfo Heather")) {
+    const CIheather = new Discord.RichEmbed()
+      .setColor("#f4ceb4")
+      .setTitle("Heather Somnium / Subject 16")
+      .setAuthor("Character Viewer | Project Second Sky")
+      .setThumbnail(
+        "https://cdn.glitch.com/ee29e663-f1b1-4e9c-afb4-3143715f667e%2FHeatherCrop.png?v=1580118025413"
+      )
+      .addField(
+        "General Info",
+        "16F, 5’7” \nHuman Experiments Survivor \nScience Side, Protagonists",
+        true
+      )
+      .addField(
+        "Esper Status",
+        "Artificial - Type III \nDeath Swap / Wound Transer",
+        true
+      )
+      .addField(
+        "Additional Info",
+        "Uses Gear - Nuclear Gauntlets + Hoop \nIntroduced? - 2v2 Arc~"
+      )
+      .attachFiles([SSWatermark])
+      .setImage("attachment://gqHWRVi.png");
+
+    message.channel.send(CIheather);
+  }
+  //DC
+  else if (
+    message.content.startsWith(
+      config.prefix + "charinfo DC" || config.prex + "charinfo omu"
+    )
+  ) {
+    const CIdc = new Discord.RichEmbed()
+      .setColor("#f4ceb4")
+      .setTitle("Porcine Omni / DC")
+      .setAuthor("Character Viewer | Project Second Sky")
+      .setThumbnail("https://i.imgur.com/nwEYz4z.png")
+      .addField(
+        "General Info",
+        "16M, 5’10” \nCyborg War Machine, Space Pirate \nScience Side, Protagonists",
+        true
+      )
+      .addField(
+        "Esper Status",
+        "Artificial - Type II \nHyperspeed Transportaion",
+        true
+      )
+      .addField(
+        "Additional Info",
+        "Uses Gear - Nuclear Rocket Fueled Sword \nIntroduced? - 2v2 Arc~"
+      )
+      .attachFiles([SSWatermark])
+      .setImage("attachment://gqHWRVi.png");
+
+    message.channel.send(CIdc);
+  }
+  //Amadeus
+  else if (message.content.startsWith(config.prefix + "charinfo Amadeus")) {
+    const CIama = new Discord.RichEmbed()
+      .setColor("#97a6bd")
+      .setTitle("Amadeus")
+      .setAuthor("Character Viewer | Project Second Sky")
+      .setThumbnail("https://i.imgur.com/pAsSbEl.png")
+      .addField(
+        "General Info",
+        "26F, 5’11” \nTeacher + Init Defensive Unit \nScience Side, Support",
+        true
+      )
+      .addField("Esper Status", "N/A \nNot an Esper", true)
+      .addField(
+        "Additional Info",
+        "Uses Gear - Taser Baton + Collapsible Riot Shield \nIntroduced - Chapter 01"
+      )
+      .attachFiles([SSWatermark])
+      .setImage("attachment://gqHWRVi.png");
+
+    message.channel.send(CIama);
+  }
+  //Mu
+  else if (message.content.startsWith(config.prefix + "charinfo Mu")) {
+    const CImu = new Discord.RichEmbed()
+    .setColor("#f58164")
+    .setTitle("Mu / MU")
+    .setAuthor("Character Viewer | Project Second Sky")
+    .setThumbnail("https://i.imgur.com/Z6nohcH.png")
+    .addField("General Info",
+             	"6F, 3” \nWar Orphan \nMagic Side, Support",
+              true
+             )
+    .addField("Esper Status",
+              "Artificial - Type III \nDevour")
+    .attachFiles([SSWatermark])
+    .setImage("attachment://gqHWRVi.png");
+    
+  	message.channel.send(CImu);
+  }
+});
