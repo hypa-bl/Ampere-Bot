@@ -1,16 +1,21 @@
 {
   "name": "Ampere",
   "engines": {
-    "node": "10"
+    "node": "10.15.3"
   },
-  "version": "1.1.7",
+  "version": "1.4.8",
   "description": "made out of hours I could’ve spent studying",
-  "main": "discjsbot.js",
+  "main": "ampere.js",
   "author": "hypa_bl",
   "scripts": {
-    "start": "node discjsbot.js"
+    "start": "node ampere.js"
   },
   "dependencies": {
-    "discord.js": "^11.5.1"
+    "discord.js": "^11.5.1",
+    "express": "^4.17.1",
+    "eslint": "^6.8.0",
+    "moment": "^2.24.0",
+    "moment-timezone": "^0.5.27",
+    "node-fetch": "^2.6.0"
   }
 }
