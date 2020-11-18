@@ -13,6 +13,18 @@ module.exports = {
       .format(
         "[○ Today is **]Do[** of **]MMMM, YYYY[.** \n○ Day is **]dddd[** \n\n○ Days past new year - **]DDDD[**\n○ Weeks past new year - **]ww[**]"
       );
+
+    const calendar = {
+      color: accent,
+      title: "Day and Date",
+      description: today,
+      footer: {
+          text: "updates are IST based (GMT+5:30)",
+          url: "https://i.imgur.com/nh3UYIL.png",
+        },
+      };
+
+      /*
     const calendar = new Discord.RichEmbed()
       .setTitle("Day and Date")
       .setDescription(today)
@@ -21,6 +33,7 @@ module.exports = {
         "updates are IST based (GMT+5:30)",
         "https://i.imgur.com/nh3UYIL.png"
       );
-    message.channel.send(calendar);
+      */
+    message.channel.send({ embed: calendar });
   }
 };

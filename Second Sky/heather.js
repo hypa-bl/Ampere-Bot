@@ -5,10 +5,9 @@ module.exports = {
   execute(message, args) {
     const Discord = require("discord.js");
     const { SSWatermark, SSEmote } = require("../panties.json");
-    const ampere = new Discord.Client;
     
     try{
-    const CIheather = new Discord.RichEmbed()
+    const CIheather = new Discord.MessageEmbed()
     	.setColor("#f4ceb4")
       .setDescription("**Heather Somnium / Subject 16**")
       .setAuthor("Character Viewer | Project Second Sky")
@@ -24,8 +23,7 @@ module.exports = {
       .addField(
         "○ Additional info",
         "Uses Gear - Nuclear Gauntlets + Hoop (post 2v2 arc) \nIntroduced - 2v2 Arc")
-    	.attachFiles([SSWatermark])
-      .setImage("attachment://gqHWRVi.png");
+      .setImage(SSWatermark);
 
     message.channel.send(CIheather).then(sentMessage => {
       sentMessage.react(SSEmote);

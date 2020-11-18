@@ -5,10 +5,9 @@ module.exports = {
   execute(message, args) {
     const Discord = require("discord.js");
     const { SSWatermark, SSEmote } = require("../panties.json");
-    const ampere = new Discord.Client;
     
     try{
-    const CIilium = new Discord.RichEmbed()
+    const CIilium = new Discord.MessageEmbed()
     	.setColor("#405469")
       .setDescription("**Ilium Bell**")
       .setAuthor("Character Viewer | Project Second Sky")
@@ -24,8 +23,7 @@ module.exports = {
       .addField(
         "○ Additional info",
         "Uses Gear - Broken Executioner's Sword \nIntroduced - Chapter 01")
-    	.attachFiles([SSWatermark])
-      .setImage("attachment://gqHWRVi.png");
+      .setImage(SSWatermark);
 
     message.channel.send(CIilium).then(sentMessage => {
       sentMessage.react(SSEmote);

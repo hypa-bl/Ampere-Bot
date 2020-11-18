@@ -5,10 +5,9 @@ module.exports = {
   execute(message, args) {
     const Discord = require("discord.js");
     const { accent, SSEmote, SSlogoImg, SSWatermark } = require("../panties.json");
-    const ampere = new Discord.Client;
   
     try{
-    const CIeric = new Discord.RichEmbed()
+    const CIeric = new Discord.MessageEmbed()
     	.setColor(accent)
       .setTitle("**Eric Marshall**")
       .setAuthor("Character Viewer | Project Second Sky")
@@ -23,8 +22,7 @@ module.exports = {
       true )
       .addField("○ Additional info",
                 "Uses Gear - Suitcase with Spare Body + Vince's Gear \nIntroduced - ??")
-    	.attachFiles([SSWatermark])
-      .setImage("attachment://gqHWRVi.png");
+      .setImage(SSWatermark);
 
     message.channel.send(CIeric).then(sentMessage => {
       sentMessage.react(SSEmote);

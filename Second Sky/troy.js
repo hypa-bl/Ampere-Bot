@@ -1,16 +1,15 @@
 module.exports = {
   name: "troy",
-  aliases: [ "oculus", "detective"], 
+  aliases: [ "yosef", "yusuf", "detective"], 
   description: "helpful guy",
   execute(message, args) {
     const Discord = require("discord.js");
     const { accent, SSEmote, SSlogoImg, SSWatermark } = require("../panties.json");
-    const ampere = new Discord.Client;
-  
+    
     try{
-    const CItroy = new Discord.RichEmbed()
+    const CItroy = new Discord.MessageEmbed()
     	.setColor(accent)
-      .setTitle("**Troy Oculus**")
+      .setTitle("**Troy Yosef**")
       .setAuthor("Character Viewer | Project Second Sky")
     	.setThumbnail(SSlogoImg)
     	.addField(
@@ -23,8 +22,7 @@ module.exports = {
       true )
       .addField("○ Additional info",
                 "Introduced - Conceptsquared Arc")
-    	.attachFiles([SSWatermark])
-      .setImage("attachment://gqHWRVi.png");
+      .setImage(SSWatermark);
 
     message.channel.send(CItroy).then(sentMessage => {
       sentMessage.react(SSEmote);

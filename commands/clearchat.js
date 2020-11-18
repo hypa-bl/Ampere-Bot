@@ -6,11 +6,11 @@ module.exports = {
     if (message.channel.type == "dm") return message.channel.send ("o'rly?");
     if (!message.member.hasPermission("MANAGE_MESSAGES")) 
       return message.channel.send(
-        "aight deletin--- whoa there bud, you lack perms to do that"
+        "you lack PERMS"
       );
     
-    const arguments = message.content.split(" ").slice(1);
-    const amount = arguments.join(" ");
+    const argument = message.content.split(" ").slice(1);
+    const amount = argument.join(" ");
     
     if (!amount) return message.channel.send("give me the numbers, mason");
     if (isNaN(amount)) return message.channel.send("the NUMBERS");
@@ -21,7 +21,7 @@ module.exports = {
     if (amount < 1)
       return message.channel.send("unable to delete lesser than one message");
     
-    message.channel.fetchMessages({ limit: amount}).then(messages => {
+    message.channel.messages.fetch({ limit: amount}).then(messages => {
       message.channel.bulkDelete(messages);
       
       console.log(

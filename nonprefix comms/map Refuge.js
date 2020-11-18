@@ -4,7 +4,7 @@ module.exports = {
   aliases: ["~map science side", "~map the refuge" ],
   execute(message, args) {
     message.channel.send({
-	files: ["https://i.imgur.com/y5xbJ8j.jpg"]
+	files: ["https://i.imgur.com/oiZn4Re.jpg"]
     });
   }
 };

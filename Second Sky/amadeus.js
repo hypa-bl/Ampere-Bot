@@ -8,7 +8,7 @@ module.exports = {
     const ampere = new Discord.Client;
     
     try{
-    const CIama = new Discord.RichEmbed()
+    const CIama = new Discord.MessageEmbed()
     	.setColor("#97a6bd")
       .setDescription("**Amadeus**")
       .setAuthor("Character Viewer | Project Second Sky")
@@ -24,8 +24,7 @@ module.exports = {
       .addField(
         "○ Additional info",
         "Uses Gear - Taser Baton + Collapsible Riot Shied \nIntroduced - Chapter 01")
-    	.attachFiles([SSWatermark])
-      .setImage("attachment://gqHWRVi.png");
+      .setImage(SSWatermark);
 
     message.channel.send(CIama).then(sentMessage => {
       sentMessage.react(SSEmote);

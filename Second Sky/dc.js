@@ -5,10 +5,9 @@ module.exports = {
   execute(message, args) {
     const Discord = require("discord.js");
     const { SSWatermark, SSEmote } = require("../panties.json");
-    const ampere = new Discord.Client;
 
     try{
-    const CIdc = new Discord.RichEmbed()
+    const CIdc = new Discord.MessageEmbed()
     	.setColor("#f4ceb4")
       .setDescription("**Porcine Omni / Subject DC**")
       .setAuthor("Character Viewer | Project Second Sky")
@@ -24,8 +23,7 @@ module.exports = {
       .addField(
         "○ Additional info",
         "Uses Gear - Ecronus Excaliburum \nIntroduced - 2v2 arc")
-    	.attachFiles([SSWatermark])
-      .setImage("attachment://gqHWRVi.png");
+      .setImage(SSWatermark);
 
     message.channel.send(CIdc).then(sentMessage => {
       sentMessage.react(SSEmote);

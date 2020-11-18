@@ -4,10 +4,10 @@ module.exports = {
   execute(message, args) {
     const Discord = require("discord.js");
     const { accent, SSEmote, SSLogoImg, SSWatermark } = require("../panties.json");
-    const ampere = new Discord.Client;
+    const ampere = new Discord.Client();
   
     try{
-    const CIembed = new Discord.RichEmbed()
+    const CIembed = new Discord.MessageEmbed()
     	.setColor(accent)
       .setTitle("Name of character")
       .setAuthor("Character Viewer | Project Second Sky")
@@ -21,8 +21,7 @@ module.exports = {
         "P/N/NA \nAbility",
       true )
       .addField("○ Additional info", "Uses Gear? \nIntroduced - Chapter / Arc")
-    	.attachFiles([SSWatermark])
-      .setImage("attachment://gqHWRVi.png");
+      .setImage(SSWatermark);
 
     message.channel.send(CIembed).then(sentMessage => {
       sentMessage.react(SSEmote);

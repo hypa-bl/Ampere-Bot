@@ -4,10 +4,9 @@ module.exports = {
   execute(message, args) {
     const Discord = require("discord.js");
     const { accent, SSEmote, SSLogoImg, SSWatermark } = require("../panties.json");
-    const ampere = new Discord.Client;
-  
+    
     try{
-    const CIsummer = new Discord.RichEmbed()
+    const CIsummer = new Discord.MessageEmbed()
     	.setColor("#e7debc")
       .setTitle("**Summer**")
       .setAuthor("Character Viewer | Project Second Sky")
@@ -21,9 +20,8 @@ module.exports = {
         "N/A \nNot an esper",
       true )
       .addField("○ Additional info",
-                "Introduced - Paper Factory Arc")
-    	.attachFiles([SSWatermark])
-      .setImage("attachment://gqHWRVi.png");
+                "Introduced - Ch 1 pt. 3")
+      .setImage(SSWatermark);
 
     message.channel.send(CIsummer).then(sentMessage => {
       sentMessage.react(SSEmote);

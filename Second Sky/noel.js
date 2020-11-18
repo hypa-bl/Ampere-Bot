@@ -5,10 +5,9 @@ module.exports = {
   execute(message, args) {
     const Discord = require("discord.js");
     const { accent, SSEmote, SSlogoImg, SSWatermark } = require("../panties.json");
-    const ampere = new Discord.Client;
   
     try{
-    const CInoel = new Discord.RichEmbed()
+    const CInoel = new Discord.MessageEmbed()
     	.setColor(accent)
       .setTitle("**Noel**")
       .setAuthor("Character Viewer | Project Second Sky")
@@ -23,8 +22,7 @@ module.exports = {
       true )
       .addField("○ Additional info",
                 "Introduced - Pre-Switch")
-    	.attachFiles([SSWatermark])
-      .setImage("attachment://gqHWRVi.png");
+      .setImage(SSWatermark);
 
     message.channel.send(CInoel).then(sentMessage => {
       sentMessage.react(SSEmote);

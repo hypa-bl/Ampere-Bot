@@ -5,10 +5,9 @@ module.exports = {
   execute(message, args) {
     const Discord = require("discord.js");
     const { SSWatermark, SSEmote } = require("../panties.json");
-    const ampere = new Discord.Client;
     
     try{
-    const CImu = new Discord.RichEmbed()
+    const CImu = new Discord.MessageEmbed()
     	.setColor("#cd595c")
       .setDescription("**Mu / Subject MU**")
       .setAuthor("Character Viewer | Project Second Sky")
@@ -24,8 +23,7 @@ module.exports = {
       .addField(
         "○ Additional info",
         "Uses Gear - Epsilon's Back \nIntroduced? - Chapter 10~")
-    	.attachFiles([SSWatermark])
-      .setImage("attachment://gqHWRVi.png");
+      .setImage(SSWatermark);
 
     message.channel.send(CImu).then(sentMessage => {
       sentMessage.react(SSEmote);

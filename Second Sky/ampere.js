@@ -8,7 +8,7 @@ module.exports = {
     const ampere = new Discord.Client;
     
     try{
-    const CIamp = new Discord.RichEmbed()
+    const CIamp = new Discord.MessageEmbed()
     	.setColor("#df9a6a")
       .setDescription("**Ampere Flask**")
       .setAuthor("Character Viewer | Project Second Sky")
@@ -24,8 +24,7 @@ module.exports = {
       .addField(
         "○ Additional info",
         "Uses Gear - Electricity Storage + Metal Rods x2 + FNAL Instant Cooler (Stolen)  \nIntroduced - Conceptsquared Arc")
-    	.attachFiles([SSWatermark])
-      .setImage("attachment://gqHWRVi.png");
+      .setImage(SSWatermark);
 
     message.channel.send(CIamp).then(sentMessage => {
       sentMessage.react(SSEmote);

@@ -4,10 +4,9 @@ module.exports = {
   execute(message, args) {
     const Discord = require("discord.js");
     const { accent, SSEmote, SSLogoImg, SSWatermark } = require("../panties.json");
-    const ampere = new Discord.Client;
   
     try{
-    const CIwinter = new Discord.RichEmbed()
+    const CIwinter = new Discord.MessageEmbed()
     	.setColor("#e7debc")
       .setTitle("**Winter**")
       .setAuthor("Character Viewer | Project Second Sky")
@@ -22,8 +21,7 @@ module.exports = {
       true )
       .addField("○ Additional info",
                 "Introduced - ConceptSquared Arc")
-    	.attachFiles([SSWatermark])
-      .setImage("attachment://gqHWRVi.png");
+      .setImage(SSWatermark);
 
     message.channel.send(CIwinter).then(sentMessage => {
       sentMessage.react(SSEmote);

@@ -5,10 +5,9 @@ module.exports = {
   execute(message, args) {
     const Discord = require("discord.js");
     const { SSWatermark, SSEmote } = require("../panties.json");
-    const ampere = new Discord.Client;
     
     try{
-    const CIepsilon = new Discord.RichEmbed()
+    const CIepsilon = new Discord.MessageEmbed()
     	.setColor("#e9c081")
       .setDescription("**Isaac Epsilon**")
       .setAuthor("Character Viewer | Project Second Sky")
@@ -24,8 +23,7 @@ module.exports = {
       .addField(
         "○ Additional info",
         "Uses Gear - The Concept² \nIntroduced - Chapter 01")
-    	.attachFiles([SSWatermark])
-      .setImage("attachment://gqHWRVi.png");
+      .setImage(SSWatermark);
 
     message.channel.send(CIepsilon).then(sentMessage => {
       sentMessage.react(SSEmote);

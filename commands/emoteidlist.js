@@ -3,10 +3,11 @@ module.exports = {
   description: "lists emotes",
   execute(message, args) {
     try {
-    const emojiList = message.guild.emojis.map((e, x) => (x + " = " + e) + " | " +e.name).join("\n");
-  	message.channel.send(emojiList);
+      const emojiList = message.guild.emojis.cache.map((e, x) => (x + ' = ' + e) + ' | ' +e.name).join('\n');
+   message.channel.send(emojiList); 
     }
-    catch {
-    message.channel.send("no custom emotes found");
+    catch (error) {
+    console.log(error);
+    message.channel.send("this command is disabled at the moment.");
     }
   }};

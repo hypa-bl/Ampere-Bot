@@ -5,10 +5,9 @@ module.exports = {
   execute(message, args) {
     const Discord = require("discord.js");
     const { accent, SSEmote, SSlogoImg, SSWatermark } = require("../panties.json");
-    const ampere = new Discord.Client;
-  
+    
     try{
-    const CImarilym = new Discord.RichEmbed()
+    const CImarilym = new Discord.MessageEmbed()
     	.setColor(accent)
       .setTitle("**Isaac Marilyn**")
       .setAuthor("Character Viewer | Project Second Sky")
@@ -23,8 +22,7 @@ module.exports = {
       true )
       .addField("○ Additional info",
                 "Introduced - Pre Switch")
-    	.attachFiles([SSWatermark])
-      .setImage("attachment://gqHWRVi.png");
+      .setImage(SSWatermark);
 
     message.channel.send(CImarilyn).then(sentMessage => {
       sentMessage.react(SSEmote);

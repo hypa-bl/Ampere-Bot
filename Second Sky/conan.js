@@ -5,10 +5,10 @@ module.exports = {
   execute(message, args) {
     const Discord = require("discord.js");
     const { accent, SSEmote, SSlogoImg, SSWatermark } = require("../panties.json");
-    const ampere = new Discord.Client;
+    const ampere = new Discord.Client();
   
     try{
-    const CIconan = new Discord.RichEmbed()
+    const CIconan = new Discord.MessageEmbed()
     	.setColor(accent)
       .setTitle("**Conan**")
       .setAuthor("Character Viewer | Project Second Sky")
@@ -23,8 +23,7 @@ module.exports = {
       true )
       .addField("○ Additional info",
                 "\nIntroduced - ??")
-    	.attachFiles([SSWatermark])
-      .setImage("attachment://gqHWRVi.png");
+      .setImage(SSWatermark);
 
     message.channel.send(CIconan).then(sentMessage => {
       sentMessage.react(SSEmote);

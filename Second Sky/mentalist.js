@@ -1,18 +1,17 @@
 module.exports = {
   name: "mentalist",
-  aliases: [ "observer", "watcher" ],
+  aliases: [ "observer", "watcher", "shaak", "chuuni", "chuni", "chüni" ],
   description: "She watches.",
   execute(message, args) {
     const Discord = require("discord.js");
     const { accent, SSEmote, SSlogoImg, SSWatermark } = require("../panties.json");
-    const ampere = new Discord.Client;
-  
+    
     try{
-    const CImentalist = new Discord.RichEmbed()
+    const CImentalist = new Discord.MessageEmbed()
     	.setColor(accent)
-      .setTitle("**Unnamed Mentalist**")
+      .setTitle("**Shaak Chüni**")
       .setAuthor("Character Viewer | Project Second Sky")
-    	.setThumbnail(SSlogoImg)
+    	.setThumbnail("https://i.imgur.com/uLFKsww.jpg")
     	.addField(
         "○ General Info",
       	"???F, 7’1” \nThe one who watches \nScience Side, Observer",
@@ -22,9 +21,8 @@ module.exports = {
         "Natural \nIllusion and dimension creation",
       true )
       .addField("○ Additional info",
-                "Introduced - ???")
-    	.attachFiles([SSWatermark])
-      .setImage("attachment://gqHWRVi.png");
+                "Introduced - Chapter 1, Part 4")
+      .setImage(SSWatermark);
 
     message.channel.send(CImentalist).then(sentMessage => {
       sentMessage.react(SSEmote);

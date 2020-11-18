@@ -8,7 +8,7 @@ module.exports = {
     const ampere = new Discord.Client;
     
     try{
-    const CIali = new Discord.RichEmbed()
+    const CIali = new Discord.MessageEmbed()
     	.setColor(accent)
       .setDescription("**Ali Crooke**")
       .setAuthor("Character Viewer | Project Second Sky")
@@ -24,8 +24,7 @@ module.exports = {
       .addField(
         "○ Additional info",
         "Uses Gear - Wayback Camera \nIntroduced - ???")
-    	.attachFiles([SSWatermark])
-      .setImage("attachment://gqHWRVi.png");
+      .setImage(SSWatermark);
 
     message.channel.send(CIali).then(sentMessage => {
       sentMessage.react(SSEmote);
