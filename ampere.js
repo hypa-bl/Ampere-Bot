@@ -173,9 +173,18 @@ setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
 });
 //———————————————————————————————————————
 // non-prefix inclusive commands
+
+
+
 ampere.on("message", async message => {
   //kil
-  if (message.content.includes(" kil") && !message.content.includes("kill")) {
+  /*
+  const dadArgs = message.content.trim().split(/ +/g);
+        if((dadArgs[0].toLowerCase() == 'i\'m' || dadArgs[0].toLowerCase() == 'im') && (dadArgs[1])) {
+                message.channel.send(`Hi ${dadArgs.slice(1).join(' ')}, I'm dad`);
+        }
+  
+  else*/ if (message.content.includes(" kil") && !message.content.includes("kill")) {
     message.channel.send("no");
   }
   //pirate
@@ -197,6 +206,12 @@ ampere.on("message", async message => {
       hypa.send("phone ring");
     });
   }
+  
+  // making dms more lively 
+  else if (message.channel.type == "dm" && message.attachments.size > 0) {
+    message.channel.send("oh")
+  }
+  
 });
 
 process.on("unhandledRejection", error => {

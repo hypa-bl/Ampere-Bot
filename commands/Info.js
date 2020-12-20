@@ -28,7 +28,7 @@ module.exports = {
 				.addFields(
 					{
 						name: '○ Prefix commands [~] | text and images',
-						value: 'info (or help), date, roll, bose, clearchat (admin-only)'
+						value: 'info (or help), date, roll, bose, hug, clearchat (admin-only)'
 					},
 					{
 						name: '○ Non-prefix commands',

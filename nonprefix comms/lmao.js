@@ -4,10 +4,10 @@ module.exports = {
 	cooldown: 1,
 	execute(message, args) {
 		const responseArray = [
-			'lmao gottem',
+			'lamo',
 			'nice',
 			'ha',
-			'ayy',
+			'loam',
 			'lmoa',
 			'<a:goos:774020452959911956>'
 		];
