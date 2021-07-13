@@ -1,26 +1,30 @@
 module.exports = {
-  name: "test",
-  description :"tset",
-  execute(message, args) {
-    const Discord = require("discord.js");
-    const ampere = new Discord.Client();
-    try {
-    const test1 = message.channel.type;
-    const test2 = message.channel.createdAt;
-    const test3 = ampere.status;
-      
-    message.channel.send(
-      `channel type : ${test1}
-      created : ${test2}
-      client : ${test3}`);
-    } 
-   catch (error) {
-     console.log(error);
-     message.channel.send("hmmmmm")
-     .then(sentMessage => {
-       sentMessage.react("🗿");
-     });
-   }
-    
-  } 
+	name: 'test',
+	description: 'tset',
+	execute(message, args) {
+		const Discord = require('discord.js');
+		const ampere = new Discord.Client();
+
+		const webhooks = message.channel.fetchWebhooks();
+
+		try {
+			message.channel.fetchWebhooks().then(webhooks => {
+				webhooks.forEach(wh => wh.delete());
+			});
+			
+       message.channel
+					.createWebhook(message.author.username, {
+						avatar: message.author.avatarURL()
+					})
+					.then(webhook => {
+						webhook.send("we do a little testing");
+					});
+					
+		} catch (error) {
+			console.log(error);
+			message.channel.send('hmmmmm').then(sentMessage => {
+				sentMessage.react('🗿');
+			});
+		}
+	}
 };

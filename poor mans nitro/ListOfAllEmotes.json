@@ -1,0 +1,33 @@
+{
+  "emotes": [
+    {
+      "name": "trollge", 
+      "ID": "854756673326284800",
+      "animated": "false"
+    }, {
+      "name": "kekwait", 
+      "ID": "854755677963419712",
+      "animated": "false"
+    }, {
+      "name": "paimonpat",
+      "ID": "798846150706200597", 
+      "animated": "true"
+    }, {
+      "name": "catjamspin", 
+      "ID": "854954156631916574", 
+      "animated": "true"
+    }, {
+      "name": "processin", 
+      "ID": "854954076290416640", 
+      "animated": "true"
+    }, {
+      "name": "ahahano", 
+      "ID": "854942702234763274", 
+      "animated": "true"
+    }, {
+       "name":"nom",
+       "ID":"774004554119381014",
+       "animated":"true"
+    }
+  ]
+}

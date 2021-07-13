@@ -1,11 +1,13 @@
 //loading our libraries
-require("dotenv").config();
+require('dotenv').config();
 var token = process.env.TOKEN;
-const Discord = require("discord.js");
-const fs = require("fs");
-const { prefix, SSpre, pfp, version } = require("./panties.json");
-const moment = require("moment-timezone");
+const Discord = require('discord.js');
+const fs = require('fs');
+const { prefix, SSpre, pfp, version } = require('./panties.json');
 
+const emoteLib = require('./poor mans nitro/ListOfAllEmotes.json');
+
+const moment = require('moment-timezone');
 
 let ampere, client;
 client = ampere = new Discord.Client();
@@ -16,206 +18,243 @@ ampere.npcommands = new Discord.Collection();
 ampere.SScommands = new Discord.Collection();
 const cooldowns = new Discord.Collection();
 
-
 const commandFiles = fs
-  .readdirSync("./commands")
-  .filter(file => file.endsWith(".js"));
+	.readdirSync('./commands')
+	.filter(file => file.endsWith('.js'));
 
 const noncomFiles = fs
-  .readdirSync("./nonprefix comms")
-  .filter(file => file.endsWith(".js"));
+	.readdirSync('./nonprefix comms')
+	.filter(file => file.endsWith('.js'));
 
 const SecondSkyFiles = fs
-  .readdirSync("./Second Sky")
-  .filter(file => file.endsWith(".js"));
-
+	.readdirSync('./Second Sky')
+	.filter(file => file.endsWith('.js'));
 
 for (const file of commandFiles) {
-  const command = require(`./commands/${file}`);
-  ampere.commands.set(command.name, command);
+	const command = require(`./commands/${file}`);
+	ampere.commands.set(command.name, command);
 }
 
 for (const file of noncomFiles) {
-  const command = require(`./nonprefix comms/${file}`);
-  ampere.npcommands.set(command.name, command);
+	const command = require(`./nonprefix comms/${file}`);
+	ampere.npcommands.set(command.name, command);
 }
 
 for (const file of SecondSkyFiles) {
-  const command = require(`./Second Sky/${file}`);
-  ampere.SScommands.set(command.name, command);
+	const command = require(`./Second Sky/${file}`);
+	ampere.SScommands.set(command.name, command);
 }
 
 //keeping the bot alive
-const express = require("express");
+const express = require('express');
 const app = express();
 const port = 3000;
 
-app.get("/", (request, response) => {
-  let ConsoleDate = moment()
-    .tz("Asia/Kolkata")
-    .format("MMM Do, h:mm:ss a");
-  console.log(`last updated > ${ConsoleDate}`);
-  response.sendStatus(200);
+app.get('/', (request, response) => {
+	let ConsoleDate = moment()
+		.tz('Asia/Kolkata')
+		.format('MMM Do, h:mm:ss a');
+	console.log(`last updated > ${ConsoleDate}`);
+	response.sendStatus(200);
 });
 
 app.listen(port, () => console.log(`listening at http://localhost:${port}`));
 
 //time based stuff
 const date = moment()
-  .tz("Asia/Kolkata")
-  .format("MMM Do, h:mm:ss a");
-
+	.tz('Asia/Kolkata')
+	.format('MMM Do, h:mm:ss a');
 
 //boot
 ampere.login(token);
-ampere.once("ready", () => {
-  ampere.user.setActivity(version + " | ~info");
-  //ampere.user.setAvatar(pfp);
-  console.log("discord.js");
-  console.log(`Ampere ${version}`);
-  console.log("booting");
-  console.log(date);
-  console.info(`Logged in as ${ampere.user.tag}.`);
+ampere.once('ready', () => {
+	ampere.user.setActivity(version + ' | ~info');
+	//ampere.user.setAvatar(pfp);
+	console.log('discord.js');
+	console.log(`Ampere ${version}`);
+	console.log('booting');
+	console.log(date);
+	console.info(`Logged in as ${ampere.user.tag}.`);
 });
 
 //responses that deploy on user input
 //———————————————————————————————————————-—
 // with prefix
-ampere.on("message", async message => {
-  const args = message.content.slice(prefix.length).split(/ +/);
-  const commandName = args.shift().toLowerCase();
+ampere.on('message', message => {
+	const args = message.content.slice(prefix.length).split(/ +/);
+	const commandName = args.shift().toLowerCase();
 
-  if (message.author.bot) return;
+	if (message.author.bot) return;
 	if (message.content.startsWith(prefix)) {
-  
-  const commandcheck =
-    ampere.commands.get(commandName) ||
-    ampere.commands.find(
-      cmd => cmd.aliases && cmd.aliases.includes(commandName)
-    );
+		const commandcheck =
+			ampere.commands.get(commandName) ||
+			ampere.commands.find(
+				cmd => cmd.aliases && cmd.aliases.includes(commandName)
+			);
 
-  if (!commandcheck) return;
+		if (!commandcheck) return;
 
-  try {
-    commandcheck.execute(message, args);
-  } catch (error) {
-    console.error(error);
-  }}
+		try {
+			commandcheck.execute(message, args);
+		} catch (error) {
+			console.error(error);
+		}
+	}
 });
 //——————————————————————————————————————
 // with charinfo prefix, Second Sky based
-ampere.on("message", async message => {
-  const args = message.content.slice(SSpre.length).split(/ +/);
-  const commandName = args.shift().toLowerCase();
-  
-  if (message.author.bot) return;
-  if (message.content.startsWith(SSpre)) {
+ampere.on('message', message => {
+	const args = message.content.slice(SSpre.length).split(/ +/);
+	const commandName = args.shift().toLowerCase();
 
-  const SScommandcheck =
-    ampere.SScommands.get(commandName) ||
-    ampere.SScommands.find(
-      cmd => cmd.aliases && cmd.aliases.includes(commandName)
-    );
-    
-  	if (SScommandcheck) {
-    SScommandcheck.execute(message, args);
-  }}
- });
+	if (message.author.bot) return;
+	if (message.content.startsWith(SSpre)) {
+		const SScommandcheck =
+			ampere.SScommands.get(commandName) ||
+			ampere.SScommands.find(
+				cmd => cmd.aliases && cmd.aliases.includes(commandName)
+			);
+
+		if (SScommandcheck) {
+			SScommandcheck.execute(message, args);
+		}
+	}
+});
 //——————————————————————————————————————
 // without prefix
-ampere.on("message", async message => {
-  const args = message.content.split(/ +/);
-  const commandName = args
-    .toString()
-    .toLowerCase()
-    .replace(/,/g, " ");
+ampere.on('message', message => {
+	const args = message.content.split(/ +/);
+	const commandName = args
+		.toString()
+		.toLowerCase()
+		.replace(/,/g, ' ');
 
-  if (message.author.bot) return;
+	if (message.author.bot) return;
 
-  const npcommcheck =
-    ampere.npcommands.get(commandName) ||
-    ampere.npcommands.find(
-      cmd => cmd.aliases && cmd.aliases.includes(commandName)
-    );
+	const npcommcheck =
+		ampere.npcommands.get(commandName) ||
+		ampere.npcommands.find(
+			cmd => cmd.aliases && cmd.aliases.includes(commandName)
+		);
 
-  if (!npcommcheck) return;
-  
-  //Cooldown Check
+	if (!npcommcheck) return;
 
-  if (!cooldowns.has(npcommcheck.name)) {
-	cooldowns.set(npcommcheck.name, new Discord.Collection());
-}
+	//Cooldown Check
 
-const now = Date.now();
-const timestamps = cooldowns.get(npcommcheck.name);
-const cooldownAmount = (npcommcheck.cooldown || 1) * 1000;
-
-if (timestamps.has(message.author.id)) {
-	const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
-
-	if (now < expirationTime) {
-		const timeLeft = (expirationTime - now) / 1000;
-		return;
+	if (!cooldowns.has(npcommcheck.name)) {
+		cooldowns.set(npcommcheck.name, new Discord.Collection());
 	}
-} 
 
-timestamps.set(message.author.id, now);
-setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
+	const now = Date.now();
+	const timestamps = cooldowns.get(npcommcheck.name);
+	const cooldownAmount = (npcommcheck.cooldown || 1) * 1000;
 
-//Cooldowns end
-  
-  
-  try {
-    npcommcheck.execute(message, args);
-  } catch (error) {
-    console.error(error);
-  }
+	if (timestamps.has(message.author.id)) {
+		const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
+
+		if (now < expirationTime) {
+			const timeLeft = (expirationTime - now) / 1000;
+			return;
+		}
+	}
+
+	timestamps.set(message.author.id, now);
+	setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
+
+	//Cooldowns end
+
+	try {
+		npcommcheck.execute(message, args);
+	} catch (error) {
+		console.error(error);
+	}
 });
 //———————————————————————————————————————
 // non-prefix inclusive commands
 
+ampere.on('message', message => {
+	// the great emote experiment
 
+	for (var i = 0; i < emoteLib.emotes.length; i++) {
+		if (message.content.toString().toLowerCase() == emoteLib.emotes[i].name) {
+			//running the real deal once we get it
+			let eName = emoteLib.emotes[i].name;
+			let eID = emoteLib.emotes[i].ID;
+			let animOrNot = emoteLib.emotes[i].animated;
 
-ampere.on("message", async message => {
-  //kil
-  /*
-  const dadArgs = message.content.trim().split(/ +/g);
-        if((dadArgs[0].toLowerCase() == 'i\'m' || dadArgs[0].toLowerCase() == 'im') && (dadArgs[1])) {
-                message.channel.send(`Hi ${dadArgs.slice(1).join(' ')}, I'm dad`);
-        }
-  
-  else*/ if (message.content.includes(" kil") && !message.content.includes("kill")) {
-    message.channel.send("no");
-  }
-  //pirate
-  else if (message.content.includes("pirate")) {
-    message.channel.send("arr").then(msg => {
-      msg.delete({ timeout:1000 });
-    });
-  }
-  //yoda
-  else if (message.content.includes("yoda")) {
-    message.channel.send("mmmm ketamine").then(msg => {
-      msg.delete({ timeout:1000 });
-    });
-  }
-  //hypa?
-  else if (message.content.includes("hypa")) {
-    let ampereclient = message.channel.client;
-    let hypa = ampereclient.users.fetch("401356535143333908").then(hypa => {
-      hypa.send("phone ring");
-    });
-  }
-  
-  // making dms more lively 
-  else if (message.channel.type == "dm" && message.attachments.size > 0) {
-    message.channel.send("oh")
-  }
-  
+      // formatting to usable emotes
+			let animEmoteFormat = `<a:${eName}:${eID}>`;
+			let imgEmoteFormat = `<:${eName}:${eID}>`;
+			
+			let emoteInQuestion =
+				animOrNot === 'true' ? animEmoteFormat : imgEmoteFormat;
+
+			// checking if dms and perms
+			const permsCheck =
+				message.channel.type !== 'dm' &&
+				message.guild.me.hasPermission('MANAGE_MESSAGES');
+			if (permsCheck) {
+				// delete author msg
+				message.channel.messages.fetch({ limit: 1 }).then(messages => {
+					message.channel.bulkDelete(messages);
+				});
+
+				// send emote as webhook
+				
+				message.channel
+					.createWebhook(message.author.username, {
+						avatar: message.author.avatarURL()
+					})
+					.then(webhook => {
+						webhook.send(emoteInQuestion);
+					});
+					
+				message.channel.fetchWebhooks().then(webhooks => {
+				webhooks.forEach(wh => wh.delete());
+			});
+					
+
+			}
+
+			// if that formality can't be had, just drop the emote as ampere
+			else message.channel.send(emoteInQuestion);
+
+			break;
+		}
+	}
+
+	//kil
+	if (message.content.includes(' kil') && !message.content.includes('kill')) {
+		message.channel.send('no');
+	}
+	//pirate
+	else if (message.content.includes('pirate')) {
+		message.channel.send('arr').then(msg => {
+			msg.delete({ timeout: 1000 });
+		});
+	}
+	//yoda
+	else if (message.content.includes('yoda')) {
+		message.channel.send('mmmm ketamine').then(msg => {
+			msg.delete({ timeout: 1000 });
+		});
+	}
+	//hypa?
+	else if (message.content.includes('hypa')) {
+		let ampereclient = message.channel.client;
+		let hypa = ampereclient.users.fetch('401356535143333908').then(hypa => {
+			hypa.send('phone ring');
+		});
+	}
+
+	// making dms more lively
+	else if (message.channel.type == 'dm' && message.attachments.size > 0) {
+		message.channel.send('oh');
+	}
 });
 
-process.on("unhandledRejection", error => {
-  console.error("Unhandled promise rejection occured: ", error);
+process.on('unhandledRejection', error => {
+	console.error('Unhandled promise rejection occured: ', error);
 });
 
 //end

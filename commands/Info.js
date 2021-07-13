@@ -33,13 +33,13 @@ module.exports = {
 					{
 						name: '○ Non-prefix commands',
 						value:
-							'ayy, kil, yuh, gg, understandable, uh oh, amen, hi (10s cooldown), nom, poggers',
+							'ayy, kil, yuh, gg, understandable, uh oh, amen, hi (10s cooldown)',
 						inline: false
 					},
 					{
-						name: '○ Charinfo commands (Second Sky only)',
+						name: '○ Auto emotes',
 						value:
-							'Use the `~charinfo` prefix followed by `character name` to get information on the character. Use `~charinfo overview` to view available characters.',
+							'Ampere auto-emotes some words. Use `~emotes` command to see a list of triggers.',
 						inline: false
 					}
 				)
@@ -66,44 +66,6 @@ module.exports = {
 
 				message.channel.send(servInfoEmbed);
 			}
-
-			/*
-			const infoEmbed = {
-				color: accent,
-				title: 'Ampere bot | by hypa.',
-				author: {
-					name: 'Info'
-				},
-				description: 'wacky ass bot with two and a half brain cells',
-				thumbnail: pfp,
-				fields: [
-					{
-						name: '○ Prefix commands [~] | text and images',
-						value: 'info, beep, date, roll'
-					},
-					{
-						name: '○ Non-prefix commands',
-						value: 'ayy, kil, yuh, gg, understandable, uh oh, amen',
-						inline: false
-					},
-					{
-						name: '○ Charinfo commands (Second Sky only)',
-						value: 'Use the `~charinfo` prefix followed by `character name` to get information on the character. Use `~charinfo overview` to view available characters.',
-						inline: false
-					},
-          {
-            name: '○ Server info',
-            value: `Name - **${message.guild.name}**\nTotal members: **${message.guild.memberCount}**`,
-            inline: false 
-          }
-				],
-				footer: {
-					text: version + ' Last boot : ' + date,
-					icon_url: pfp
-				}
-			};
-			message.channel.send({ embed: infoEmbed });
-      */
 		} catch (error) {
 			console.log('your infoembed just shat its pants ' + error);
 		}
